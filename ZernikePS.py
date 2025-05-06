@@ -59,12 +59,12 @@ def aj0j1(j0,j1,jnm):
     m1 = jnm[j1-1][2]
     if (m0 == m1 and np.mod(j0-j1,2)==0) or (m0==0 and m1==0):
         #print(n0,n1,m0)
-        #----------N Roddier文章的协方差-------------------实际是有一丢丢问题的----主要是相位的功率谱的0.0229他计算的有点问题
-        K = gamma(14/3)*((24/5)*gamma(6/5))**(5/6)*(gamma(11/6))**2*(-1)**((n0+n1-2*m0)/2)*np.sqrt((n0+1)*(n1+1))/2/np.pi**2
-        cov = K*gamma((n0+n1-5/3)/2)/gamma((n0-n1+17/3)/2)/gamma((n1-n0+17/3)/2)/gamma((n0+n1+23/3)/2)
+        #----------N Roddier文章的协方差-------------------实际是有一丢丢问题的----主要是相位的功率谱的0.0229他计算的有点问题,eq(6) in Nicolas's paper is slightly wrong, we give a corrected version here.
+        #K = gamma(14/3)*((24/5)*gamma(6/5))**(5/6)*(gamma(11/6))**2*(-1)**((n0+n1-2*m0)/2)*np.sqrt((n0+1)*(n1+1))/2/np.pi**2
+        #cov = K*gamma((n0+n1-5/3)/2)/gamma((n0-n1+17/3)/2)/gamma((n1-n0+17/3)/2)/gamma((n0+n1+23/3)/2)
         #----------Noll文章里的式(25)加上Sasiela的Mellin变换------------------------------------
-        #coeffront = C*(2*np.pi)**(11/3)*gamma(7/3)*gamma(17/6)/np.pi/2**(5/3)/np.sqrt(np.pi)
-        #cov = coeffront*(-1)**((n0+n1-2*m0)/2)*np.sqrt((n0+1)*(n1+1))*gamma(-11/6+(n0+n1+2)/2)/gamma(17/6+(n0+n1+2)/2)/gamma(17/6+(n0-n1)/2)/gamma(17/6+(n1-n0)/2)
+        coeffront = C*(2*np.pi)**(11/3)*gamma(7/3)*gamma(17/6)/np.pi/2**(5/3)/np.sqrt(np.pi)
+        cov = coeffront*(-1)**((n0+n1-2*m0)/2)*np.sqrt((n0+1)*(n1+1))*gamma(-11/6+(n0+n1+2)/2)/gamma(17/6+(n0+n1+2)/2)/gamma(17/6+(n0-n1)/2)/gamma(17/6+(n1-n0)/2)
     else:
         cov=0
     return(cov)
